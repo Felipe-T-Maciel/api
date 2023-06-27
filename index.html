@@ -1,0 +1,13 @@
+<script>
+
+	
+	console.log('começando a buscar os dados');
+	fetch('http://localhost:4300/hello/world', {
+		method: 'GET'
+	}).then((m) =>{
+		console.log("mensagem: ",m);
+	}).catch(e) => {
+		console.log("Error: ", e);
+	});
+
+</script>
