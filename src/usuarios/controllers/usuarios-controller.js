@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = express.Router();
-const Usuario = require('../models/user')
+const Usuario = require('../models/user');
+const { use } = require('express/lib/application');
 
 function createRoute(){
     routes.post('/usuarios', async (req, res) => {
@@ -13,33 +14,46 @@ function createRoute(){
 
 
 function findByIdRoute(){
-    routes.get('/usuarios/:id', (req, res) => {
-        console.log("procura por id: ",req.params)
-        res.json([]);
+    routes.get('/usuarios/:id',async (req, res) => {
+        console.log("procura por id: ",req.params);
+        res.json([await Usuario.findOne({
+            where:{
+                id: req.params.id
+            }
+        })]);
 
     })
 }
 
 function updateRoute(){
-    routes.put('/usuarios', (req, res) => {
-        console.log("update: ",req.body)
-        res.json([]);
+    routes.put('/usuarios/:id', async (req, res) => {
+        await Usuario.update(req.body, {
+            where:{
+                id: req.params.id
+            }
+        })
+        res.json(["update: ", req.body]);
 
     })
 }
 
 function removeRoute(){
-    routes.delete('/usuarios', (req, res) => {
+    routes.delete('/usuarios/:id', async (req, res) => {
         console.log("delete: ",req.params)
+        await Usuario.destroy(
+            {
+                where:{
+                    id : req.params.id
+                }
+            }
+        )
         res.json([]);
-
     })
 }
 
 function findAllRoute(){
-    routes.get('/usuarios', (req, res) => {
-        res.json([]);
-
+    routes.get('/usuarios', async (req, res) => {
+        res.json(await Usuario.findAll());
     })
 }
 

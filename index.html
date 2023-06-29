@@ -1,12 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<header></header>
+	<main class="">
+		<input type="text" placeholder="id do usuario">
+		<input type="text" placeholder="senha">
+		<button>Entrar</button>
+	</main>
+</body>
+</html>
+
 <script>
 
-	
 	console.log('começando a buscar os dados');
-	fetch('http://localhost:4300/hello/world', {
+	fetch('http://localhost:4300/usuarios', {
 		method: 'GET'
 	}).then((m) =>{
 		console.log("mensagem: ",m);
-	}).catch(e) => {
+	}).catch((e) => {
 		console.log("Error: ", e);
 	});
 
